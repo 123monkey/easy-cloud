@@ -4,6 +4,7 @@ import com.easy.cloud.core.common.json.utils.EcJSONUtils;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -107,7 +108,10 @@ public class LambdaTest {
                 .collect(Collectors.toSet());
         studentSet.forEach(student1 -> System.out.println(student1.name));
 
+        Set<String> strings = list.stream()
+                .map(str -> str.name.toUpperCase())
 
+                .collect(Collectors.toSet());
         Set<String> names = list.stream()
                 .filter(stu -> stu.name.startsWith("zhang"))
                 .map(x -> x.getName())
@@ -116,9 +120,19 @@ public class LambdaTest {
     }
 
     @Test
-    public void testStream() {
-        Stream<Integer> stream = Stream.of(1,2,3,4,5,10,23);
+    public void testReduce() {
+        Integer [] numbers = {1,2,3,4,5,10,23};
+        Stream<Integer> stream = Arrays.stream(numbers);
         System.out.println(stream.reduce(0, (cc, element) -> cc + element));
+        int max = Arrays.stream(numbers)
+                .max(Comparator.comparing(Function.identity()))
+                .get();
+        System.out.println(max);
+        Student [] students = {new Student("zhangsan"), new Student("zhan1222gsan"), new Student("zhangsa212n")};
+        Student student11 = Arrays.stream(students)
+                .max(Comparator.comparing(Student::getName))
+                .get();
+        System.out.println(student11);
 
         Stream<Student> studentStream = Stream.of(new Student("zhangsan"), new Student("Lisi"));
         Stream<Student> studentStreamTemp = studentStream.filter(student -> student.getName().startsWith("zh"));
@@ -153,6 +167,20 @@ public class LambdaTest {
         map2.values().forEach(stu -> System.out.println(stu));
     }
 
+    @Test
+    public void testStr() {
+        String [] strings ={"hello", "world",null,"hello2","hello3"};
+        String s = Arrays.stream(strings)
+                .filter(str -> str != null)
+                .filter(str -> str.startsWith("he"))
+                .filter( str -> !str.endsWith("lo"))
+                .map(str ->  str.toUpperCase())
+                .map(str -> str.toLowerCase())
+                .map(str -> str + "AAAA")
+                .collect(Collectors.joining(",", "[", "]"));
+
+        System.out.println(s);
+    }
     public class Student {
         private String name;
         private List<String> book;
