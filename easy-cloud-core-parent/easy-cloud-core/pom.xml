@@ -32,6 +32,18 @@
 	</properties>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+		<dependency>
+			<groupId>easy.cloud.core</groupId>
+			<artifactId>hutool-starter</artifactId>
+			<version>1.0.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>cn.hutool</groupId>
+					<artifactId>hutool-json</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- spring框架相关依赖 bigen -->
 		<!-- spring-boot-start-x依赖 begin -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->

@@ -418,12 +418,10 @@ public class EcLogUtils {
 		if (isNeedWrap) {
 			logger.error("\r");
 		}
-		logger.error("**********************************************   start_logger:" + logTitle
-				+ ":start_logger   **********************************************");
+		logger.error("**********************************************   start_logger:{}:start_logger   **********************************************", logTitle);
 		logger.error(throwable.getMessage(), throwable);
 		
-		logger.error("**********************************************   end_logger:" + logTitle
-				+ ":end_logger   **********************************************");
+		logger.error("**********************************************   end_logger:{}:end_logger   **********************************************", logTitle);
 		if (isNeedWrap) {
 			logger.error("\r\n");
 		}
